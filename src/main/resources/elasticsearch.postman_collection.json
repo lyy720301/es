@@ -1,0 +1,567 @@
+{
+	"info": {
+		"_postman_id": "0b306835-d88e-4ed9-a6ed-fa5d0364557f",
+		"name": "elastic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20214191"
+	},
+	"item": [
+		{
+			"name": "索引 - 创建",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9200/user",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "索引 - 查询所有",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9200/_cat/indices?v",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "添加文档 - 自定义id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"david\",\r\n    \"sex\": \"男人\",\r\n    \"tel\": 110\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/user/_doc/101",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"user",
+						"_doc",
+						"101"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - id查询",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9200/user/_doc/101",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"user",
+						"_doc",
+						"101"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 全部查询",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"match_all\": {}\r\n  },\r\n  \"size\": 1000  // 设置适当的大小以确保返回所有结果\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/books/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"books",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 全量数据更新",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"小米手机2\",\r\n    \"price\": 123\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_doc/1001",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_doc",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 局部数据更新",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"doc\": {\r\n        \"title\": \"小米手机\",\r\n        \"price\": 2666\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_update/PdZPcpIB3JnUJwl-tG4C",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_update",
+						"PdZPcpIB3JnUJwl-tG4C"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 删除数据",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9200/shopping/_doc/1002",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_doc",
+						"1002"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 条件查询",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9200/shopping/_search?q=title:华为",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "title:华为"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 条件查询 请求体",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"sex\": \"男人\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/user/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"user",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 条件查询 请求体 全部查询",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"match_all\": {\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 条件查询 请求体 分页查询",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"match_all\": {\r\n        }\r\n    },\r\n    \"from\": 1,\r\n    \"size\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 条件查询 请求体 分页查询 指定字段",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"match_all\": {\r\n        }\r\n    },\r\n    \"from\": 0,\r\n    \"size\": 10,\r\n    \"_source\": [\"title\"],\r\n    // 排序\r\n    \"sort\": {\r\n        \"price\": {\r\n            \"order\": \"desc\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 多条件查询",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                {\r\n                    \"match\": {\r\n                        \"price\": 123\r\n                    }\r\n                },\r\n                {\r\n                    \"match\": {\r\n                        \"title\": \"华为\"\r\n                    }\r\n                }\r\n            ],\r\n            // 条件查询\r\n            \"filter\": {\r\n                \"range\": {\r\n                    \"price\": {\r\n                        \"gt\": 100\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 多条件查询 完全匹配",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"match_phrase\": {\r\n            \"title\": \"小\"\r\n        }\r\n    },\r\n    // 高亮显示\r\n    \"highlight\": {\r\n        \"fields\": {\r\n            \"title\": {}\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 聚合操作 分组",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // 聚合操作\r\n    \"aggs\": {\r\n        // 随意起名\r\n        \"price_group\": {\r\n            \"terms\": {\r\n                // 分组字段\r\n                \"field\": \"price\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "文档 - 聚合操作 平均值",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // 聚合操作\r\n    \"aggs\": {\r\n        // 随意起名\r\n        \"price_avg\": {\r\n            \"avg\": {\r\n                // 平均值\r\n                \"field\": \"price\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/shopping/_search",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"shopping",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "索引 - 添加/更新映射",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"properties\": {\r\n        \"name\": {\r\n            \"type\": \"text\",\r\n            \"index\": true\r\n        },\r\n        \"sex\": {\r\n            \"type\": \"keyword\",\r\n            \"index\": true\r\n        },\r\n        \"tel\": {\r\n            \"type\": \"keyword\",\r\n            \"index\": false\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9200/user/_mapping",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"user",
+						"_mapping"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "123456",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "elastic",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
