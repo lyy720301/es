@@ -91,7 +91,7 @@ public class Main {
                 .setColumnSeparator(',')
                 .setSkipFirstDataRow(true)
                 .build();
-        String csvPath = "C:\\Users\\44410\\IdeaProjects\\es-client\\src\\main\\resources\\books.csv";
+        String csvPath = "C:\\Users\\44410\\IdeaProjects\\es-client\\src\\main\\resources\\books_en.csv";
         MappingIterator<Book> it = csvMapper
                 .readerFor(Book.class)
                 .with(schema)
